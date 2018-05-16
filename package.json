@@ -1,0 +1,30 @@
+{
+  "name": "malown",
+  "version": "1.0.0",
+  "description": "REST service that allows for sending e-mails via various third-party providers.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aevitas/malown.git"
+  },
+  "keywords": [
+    "malown",
+    "e-mail",
+    "mailer",
+    "mailing",
+    "service"
+  ],
+  "author": "aevitas",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/aevitas/malown/issues"
+  },
+  "homepage": "https://github.com/aevitas/malown#readme",
+  "devDependencies": {
+    "tslint": "^5.10.0",
+    "typescript": "^2.8.3"
+  }
+}
