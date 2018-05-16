@@ -19,6 +19,10 @@ export class SendGridMessenger implements IMessenger {
 
         this.useHtmlMessages = options.useHtmlMessages;
 
+        if (!options.apiKey) {
+            throw new Error("You need to provide a SendGrid API key in order to use the SendGridMessenger!");
+        }
+
         sendGridMailer.setApiKey(options.apiKey);
     }
 
