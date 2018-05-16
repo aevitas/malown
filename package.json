@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "REST service that allows for sending e-mails via various third-party providers.",
   "main": "index.js",
-  "scripts": {
+  "scripts": {    
+    "start": "node dist/index.js",
+    "build": "node_modules/.bin/tsc",
     "test": "npm test"
   },
   "repository": {
