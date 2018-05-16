@@ -1,6 +1,6 @@
 import { IMessage } from "./imessage";
-import { MessageSendResult } from "../abstractions/messageSendResult";
+import { IMessageSendResult } from "./imessageSendResult";
 
 export interface IMessenger {
-    sendMessageAsync(message: IMessage): Promise<MessageSendResult>;
+    sendMessageAsync(message: IMessage): Promise<IMessageSendResult>;
 }

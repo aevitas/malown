@@ -1,6 +1,6 @@
 import { IMessenger } from "../abstractions/imessenger";
 import { IMessage } from "../abstractions/imessage";
-import { MessageSendResult } from "../abstractions/messageSendResult";
+import { IMessageSendResult } from "../abstractions/imessageSendResult";
 
 import sendGridMailer = require("@sendgrid/mail");
 
@@ -22,12 +22,12 @@ export class SendGridMessenger implements IMessenger {
         sendGridMailer.setApiKey(options.apiKey);
     }
 
-    public async sendMessageAsync(message: IMessage): Promise<MessageSendResult> {
+    public async sendMessageAsync(message: IMessage): Promise<IMessageSendResult> {
         if (!message) {
             throw new Error("Message can not be empty!");
         }
 
-        return new Promise<MessageSendResult>(async (resolve, reject) => {
+        return new Promise<IMessageSendResult>(async (resolve, reject) => {
             try {
                 await sendGridMailer.send({
                     from: message.from,
