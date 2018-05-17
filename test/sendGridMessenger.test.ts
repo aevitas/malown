@@ -30,4 +30,19 @@ describe("sendMessageAsync", () => {
     it("empty message throws", async () => {
         await messenger.sendMessageAsync({} as IMessage).should.eventually.be.rejected;
     });
+
+    it ("empty subject throws", async () => {
+        await messenger.sendMessageAsync({recipient: "anything@localhost", body: "hello"} as IMessage)
+        .should.eventually.be.rejected;
+    });
+
+    it ("empty recipient throws", async () => {
+        await messenger.sendMessageAsync({body: "hello", recipient: "anyone@localhost"} as IMessage)
+        .should.eventually.be.rejected;
+    });
+
+    it ("empty body throws", async () => {
+        await messenger.sendMessageAsync({recipient: "anyone@localhost", subject: "hello"} as IMessage)
+        .should.eventually.be.rejected;
+    });
 });
