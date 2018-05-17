@@ -33,6 +33,7 @@
     "debug": "^3.1.0",
     "gulp": "^3.9.1",
     "gulp-typescript": "^4.0.2",
+    "supports-color": "^5.4.0",
     "tslint": "^5.10.0",
     "typescript": "^2.8.3"
   },

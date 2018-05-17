@@ -2,12 +2,15 @@ require("dotenv").config();
 
 import * as http from "http";
 import { Service } from "./service";
+import { SendGridMessenger } from "./sendGrid/sendGridMessenger";
 
 const debug = require("debug")("service");
 
 debug("fuck yo couch");
 
-const service = new Service();
+const emailMessenger = new SendGridMessenger({apiKey: "", useHtmlMessages: false});
+
+const service = new Service(emailMessenger);
 let listenPort: number;
 
 const envPort = process.env.PORT;
