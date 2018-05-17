@@ -55,18 +55,6 @@ export class SendGridMessenger implements IMessenger {
             return false;
         }
 
-        if (!message.recipient) {
-            return false;
-        }
-
-        if (!message.subject) {
-            return false;
-        }
-
-        if (!message.body) {
-            return false;
-        }
-
-        return true;
+        return message.body.length > 0 && message.recipient.length > 0 && message.subject.length > 0;
     }
 }
