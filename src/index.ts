@@ -1,16 +1,18 @@
 require("dotenv").config();
 
+import "reflect-metadata";
 import * as http from "http";
 import { Service } from "./service";
-import { SendGridMessenger } from "./sendGrid/sendGridMessenger";
+import { Types } from "./types";
+import { container } from "./serviceContainer";
 
 const debug = require("debug")("service");
 
 debug("fuck yo couch");
 
-const emailMessenger = new SendGridMessenger({apiKey: "", useHtmlMessages: false});
 
-const service = new Service(emailMessenger);
+const service: Service = container.get<Service>(Types.Service);
+
 let listenPort: number;
 
 const envPort = process.env.PORT;

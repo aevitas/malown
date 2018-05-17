@@ -1,6 +1,8 @@
 import { IMessenger } from "../abstractions/imessenger";
 import { IMessage } from "../abstractions/imessage";
 import { IMessageSendResult } from "../abstractions/imessageSendResult";
+import { Types } from "../types";
+import { injectable, inject } from "inversify";
 
 import sendGridMailer = require("@sendgrid/mail");
 
@@ -9,10 +11,11 @@ export interface ISendGridOptions {
     useHtmlMessages: boolean;
 }
 
+@injectable()
 export class SendGridMessenger implements IMessenger {
     private useHtmlMessages: boolean;
 
-    public constructor(options: ISendGridOptions) {
+    public constructor(@inject(Types.SendGridOptions) options: ISendGridOptions) {
         if (!options) {
             throw new Error("Can not construct a SendGridMessenger without valid options!");
         }

@@ -1,16 +1,19 @@
 import * as express from "express";
 import * as logger from "morgan";
 import * as bodyParser from "body-parser";
+import { injectable, inject } from "inversify";
 import { IMessenger } from "./abstractions/imessenger";
 import { IMessage } from "./abstractions/imessage";
+import { Types } from "./types";
 
+@injectable()
 export class Service {
 
     public express: express.Application;
 
     private emailMessenger: IMessenger;
 
-     public constructor(emailMessenger: IMessenger) {
+     public constructor(@inject(Types.IMessenger) emailMessenger: IMessenger) {
          this.express = express();
          this.configureMiddleware();
          this.configureRoutes();
@@ -38,7 +41,7 @@ export class Service {
         router.get("/email/send", async (request, response, _next) => {
             const messageOptions: IMessage = request.body;
 
-            if (!messageOptions) { 
+            if (!messageOptions) {
                 return response.sendStatus(400);
             }
 
