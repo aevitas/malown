@@ -1,6 +1,4 @@
-import { IMessenger } from "../abstractions/imessenger";
-import { IMessage } from "../abstractions/imessage";
-import { IMessageSendResult } from "../abstractions/imessageSendResult";
+import { IMessenger, IMessage, IMessageSendResult } from "../abstractions";
 import { Types } from "../types";
 import { injectable, inject } from "inversify";
 

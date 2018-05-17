@@ -1,7 +1,7 @@
 import { SendGridMessenger, ISendGridOptions } from "../src/sendGrid/sendGridMessenger";
 import chai = require("chai");
 import chaiAsPromised = require("chai-as-promised");
-import { IMessage } from "../src/abstractions/imessage";
+import { IMessage } from "../src/abstractions";
 
 chai.use(chaiAsPromised);
 

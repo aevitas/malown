@@ -2,8 +2,7 @@ import * as express from "express";
 import * as logger from "morgan";
 import * as bodyParser from "body-parser";
 import { injectable, inject } from "inversify";
-import { IMessenger } from "./abstractions/imessenger";
-import { IMessage } from "./abstractions/imessage";
+import { IMessenger, IMessage } from "./abstractions";
 import { Types } from "./types";
 
 @injectable()

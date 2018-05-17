@@ -1,4 +1,4 @@
-import { IMessenger } from "./abstractions/imessenger";
+import { IMessenger } from "./abstractions";
 import { Container } from "inversify";
 import { Types } from "./types";
 import {
