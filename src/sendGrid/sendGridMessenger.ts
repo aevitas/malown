@@ -30,7 +30,7 @@ export class SendGridMessenger implements IMessenger {
     }
 
     public async sendMessageAsync(message: IMessage): Promise<IMessageSendResult> {
-        if (!message) {
+        if (!this.isValidMessage(message)) {
             throw new Error("Message can not be empty!");
         }
 
@@ -50,5 +50,25 @@ export class SendGridMessenger implements IMessenger {
                 return reject(`An error occurred while sending a message: ${err}`);
             }
         });
+    }
+
+    private isValidMessage(message: IMessage): boolean {
+        if (!message) {
+            return false;
+        }
+
+        if (!message.recipient) {
+            return false;
+        }
+
+        if (!message.subject) {
+            return false;
+        }
+
+        if (!message.body) {
+            return false;
+        }
+
+        return true;
     }
 }
