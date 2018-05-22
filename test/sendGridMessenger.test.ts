@@ -1,4 +1,7 @@
-import { SendGridMessenger, ISendGridOptions } from "../src/sendGrid/sendGridMessenger";
+import {
+    SendGridMessenger,
+    ISendGridOptions
+} from "../src/sendGrid/sendGridMessenger";
 import chai = require("chai");
 import chaiAsPromised = require("chai-as-promised");
 import { IMessage } from "../src/abstractions";
@@ -13,11 +16,19 @@ const expect = chai.expect;
 
 describe("constructor", () => {
     it("empty options throws", () => {
-        expect(() => new SendGridMessenger({} as ISendGridOptions)).throws();
+        expect(
+            () => new SendGridMessenger({} as ISendGridOptions)
+        ).throws();
     });
 
     it("empty api key throws", () => {
-        expect(() => new SendGridMessenger({apiKey: "", useHtmlMessages: true})).throws();
+        expect(
+            () =>
+                new SendGridMessenger({
+                    apiKey: "",
+                    useHtmlMessages: true
+                })
+        ).throws();
     });
 });
 
@@ -25,24 +36,34 @@ describe("sendMessageAsync", () => {
     // This actually doesn't mock the messaging functionality included in SendGridMessenger, which means
     // that if we do hit the code that sends a message, we'll make a call to their API. For now, that doesn't
     // matter too much as these tests pretty much only hit preconditions and not the actual functionality.
-    const messenger = new SendGridMessenger({apiKey: "something something test", useHtmlMessages: true});
+    const messenger = new SendGridMessenger({
+        apiKey: "something something test",
+        useHtmlMessages: true
+    });
 
     it("empty message throws", async () => {
-        await messenger.sendMessageAsync({} as IMessage).should.eventually.be.rejected;
+        await messenger.sendMessageAsync({} as IMessage).should.eventually
+            .be.rejected;
     });
 
-    it ("empty subject throws", async () => {
-        await messenger.sendMessageAsync({recipient: "anything@localhost", body: "hello"} as IMessage)
-        .should.eventually.be.rejected;
+    it("empty subject throws", async () => {
+        await messenger.sendMessageAsync({
+            recipient: "anything@localhost",
+            body: "hello"
+        } as IMessage).should.eventually.be.rejected;
     });
 
-    it ("empty recipient throws", async () => {
-        await messenger.sendMessageAsync({body: "hello", recipient: "anyone@localhost"} as IMessage)
-        .should.eventually.be.rejected;
+    it("empty recipient throws", async () => {
+        await messenger.sendMessageAsync({
+            body: "hello",
+            recipient: "anyone@localhost"
+        } as IMessage).should.eventually.be.rejected;
     });
 
-    it ("empty body throws", async () => {
-        await messenger.sendMessageAsync({recipient: "anyone@localhost", subject: "hello"} as IMessage)
-        .should.eventually.be.rejected;
+    it("empty body throws", async () => {
+        await messenger.sendMessageAsync({
+            recipient: "anyone@localhost",
+            subject: "hello"
+        } as IMessage).should.eventually.be.rejected;
     });
 });

@@ -1,4 +1,8 @@
-import { IMessage, IChatMessenger, IMessageSendResult } from "../abstractions";
+import {
+    IMessage,
+    IChatMessenger,
+    IMessageSendResult
+} from "../abstractions";
 import { injectable, inject } from "inversify";
 import { Types } from "../types";
 
@@ -10,21 +14,28 @@ export interface ISlackOptions {
 
 @injectable()
 export class SlackMessenger implements IChatMessenger {
-
     private slack: any;
 
-    public constructor(@inject (Types.SlackOptions) options: ISlackOptions) {
+    public constructor(
+        @inject(Types.SlackOptions) options: ISlackOptions
+    ) {
         if (!options) {
-            throw new Error("Can not construct the Slack messenger without valid options!");
+            throw new Error(
+                "Can not construct the Slack messenger without valid options!"
+            );
         }
 
         this.slack = new slackImport();
         this.slack.setWebhook(options.webhookUri);
     }
 
-    public sendMessageAsync(message: IMessage): Promise<IMessageSendResult> {
+    public sendMessageAsync(
+        message: IMessage
+    ): Promise<IMessageSendResult> {
         if (!message) {
-            throw new Error("Message is required when sending a Slack message!");
+            throw new Error(
+                "Message is required when sending a Slack message!"
+            );
         }
 
         return new Promise<IMessageSendResult>((resolve, reject) => {
@@ -35,11 +46,12 @@ export class SlackMessenger implements IChatMessenger {
             });
 
             if (result) {
-                return resolve({isSuccessful: true});
+                return resolve({ isSuccessful: true });
             }
 
-            return reject("Could not send the specified message to a slack channel!");
+            return reject(
+                "Could not send the specified message to a slack channel!"
+            );
         });
     }
-
 }
