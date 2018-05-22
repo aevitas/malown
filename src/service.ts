@@ -29,6 +29,12 @@ export class Service {
     this.express.use(logger("dev"));
     this.express.use(bodyParser.json());
     this.express.use(bodyParser.urlencoded({ extended: false }));
+
+    this.express.use((_request, response, next) => {
+      response.removeHeader("x-powered-by");
+
+      next();
+    });
   }
 
   private configureRoutes(): void {
@@ -38,7 +44,7 @@ export class Service {
       return response.sendStatus(200);
     });
 
-    router.get("/email/send", async (request, response, _next) => {
+    router.post("/email/send", async (request, response, _next) => {
       const messageOptions: IMessage = request.body;
 
       if (!messageOptions) {
