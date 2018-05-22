@@ -6,6 +6,5 @@
         "**dist": true
     },
     "tslint.autoFixOnSave": true,
-    "tslint.alwaysShowStatus": true,
-    "prettier.eslintIntegration": true
+    "tslint.alwaysShowStatus": true
 }
