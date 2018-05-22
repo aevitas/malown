@@ -2,7 +2,7 @@ import * as express from "express";
 import * as logger from "morgan";
 import * as bodyParser from "body-parser";
 import { injectable, inject } from "inversify";
-import { IMessage, IEmailMessenger } from "./abstractions";
+import { IMessage, IEmailMessenger, IMessageSendResult } from "./abstractions";
 import { Types } from "./types";
 
 @injectable()
@@ -76,9 +76,12 @@ export class Service {
                 });
             }
 
-            const result = await this.emailMessenger.sendMessageAsync(
-                messageOptions
-            );
+            let result: IMessageSendResult;
+            try {
+                result = await this.emailMessenger.sendMessageAsync(messageOptions);
+            } catch {
+                result = {isSuccessful: false};
+            }
 
             if (result.isSuccessful) {
                 return response.sendStatus(200);
