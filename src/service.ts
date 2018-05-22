@@ -2,16 +2,16 @@ import * as express from "express";
 import * as logger from "morgan";
 import * as bodyParser from "body-parser";
 import { injectable, inject } from "inversify";
-import { IMessenger, IMessage } from "./abstractions";
+import { IMessage, IEmailMessenger } from "./abstractions";
 import { Types } from "./types";
 
 @injectable()
 export class Service {
   public express: express.Application;
 
-  private emailMessenger: IMessenger;
+  private emailMessenger: IEmailMessenger;
 
-  public constructor(@inject(Types.IMessenger) emailMessenger: IMessenger) {
+  public constructor(@inject(Types.EmailMessenger) emailMessenger: IEmailMessenger) {
     this.express = express();
     this.configureMiddleware();
     this.configureRoutes();

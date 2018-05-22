@@ -1,4 +1,4 @@
-import { IMessenger, IMessage, IMessageSendResult } from "../abstractions";
+import { IEmailMessenger, IMessage, IMessageSendResult } from "../abstractions";
 import { Types } from "../types";
 import { injectable, inject } from "inversify";
 
@@ -10,7 +10,7 @@ export interface ISendGridOptions {
 }
 
 @injectable()
-export class SendGridMessenger implements IMessenger {
+export class SendGridMessenger implements IEmailMessenger {
   private useHtmlMessages: boolean;
 
   public constructor(@inject(Types.SendGridOptions) options: ISendGridOptions) {

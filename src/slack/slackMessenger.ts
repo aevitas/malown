@@ -1,4 +1,4 @@
-import { IMessage, IMessenger, IMessageSendResult } from "../abstractions";
+import { IMessage, IChatMessenger, IMessageSendResult } from "../abstractions";
 import { injectable, inject } from "inversify";
 import { Types } from "../types";
 
@@ -9,7 +9,7 @@ export interface ISlackOptions {
 }
 
 @injectable()
-export class SlackMessenger implements IMessenger {
+export class SlackMessenger implements IChatMessenger {
 
     private slack: any;
 

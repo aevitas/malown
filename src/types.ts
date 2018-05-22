@@ -1,5 +1,6 @@
 export const enum Types {
-  IMessenger = "IMessenger",
+  EmailMessenger = "EmailMessenger",
+  ChatMessenger = "ChatMessenger",
   SendGridMessenger = "SendGridMessenger",
   SendGridOptions = "SendGridOptions",
   Service = "Service",
