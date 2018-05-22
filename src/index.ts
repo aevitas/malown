@@ -6,21 +6,23 @@ import { Service } from "./service";
 import { Types } from "./types";
 import { container } from "./serviceContainer";
 
+interface IServiceOptions {
+  port: number;
+}
+
 const debug = require("debug")("service");
 
-debug("fuck yo couch");
+const options = {...process.env as any} as IServiceOptions;
 
 const service: Service = container.get<Service>(Types.Service);
 
 let listenPort: number;
-
-const envPort = process.env.PORT;
-if (envPort) {
-  listenPort = parseInt(envPort);
+if (options.port) {
+  listenPort = options.port;
 
   if (!listenPort) {
     throw new Error(
-      `${envPort} specified in the environment variables is not a valid port number!`
+      `${options.port} specified in the environment variables is not a valid port number!`
     );
   }
 
