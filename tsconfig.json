@@ -10,6 +10,7 @@
         "allowSyntheticDefaultImports": false,
         "allowUnreachableCode": false,
         "allowUnusedLabels": false,
+        "alwaysStrict": true,
         "experimentalDecorators": true,
         "forceConsistentCasingInFileNames": true,
         "noEmitOnError": true,
