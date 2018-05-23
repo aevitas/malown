@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node dist/index.js",
     "build": "gulp scripts",
-    "test": "mocha --reporter spec --compilers ts:ts-node/register \"test/**/*.test.ts*\""
+    "test": "node_modules/.bin/mocha --reporter spec --compilers ts:ts-node/register \"test/**/*.test.ts*\""
   },
   "repository": {
     "type": "git",
