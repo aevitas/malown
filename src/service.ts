@@ -46,30 +46,30 @@ export class Service {
             return response.sendStatus(200);
         });
 
-        router.post("/email/send", async (request, response, _next) => {
-            const messageOptions: IMessage = request.body;
+        router.post("/send/email", async (request, response, _next) => {
+            const message: IMessage = request.body;
 
-            if (!messageOptions) {
+            if (!message) {
                 return response.sendStatus(400);
             }
 
             // There has to be a better way of doing individual property validation here,
             // but we'll go with this for the mean time.
-            if (!messageOptions.recipient) {
+            if (!message.recipient) {
                 response.statusCode = 400;
                 return response.json({
                     message: "Recipient is required when sending e-mails."
                 });
             }
 
-            if (!messageOptions.subject) {
+            if (!message.subject) {
                 response.statusCode = 400;
                 return response.json({
                     message: "Subject is required when sending e-mails."
                 });
             }
 
-            if (!messageOptions.body) {
+            if (!message.body) {
                 response.statusCode = 400;
                 return response.json({
                     message: "Body is required when sending e-mails."
@@ -78,7 +78,7 @@ export class Service {
 
             let result: IMessageSendResult;
             try {
-                result = await this.emailMessenger.sendMessageAsync(messageOptions);
+                result = await this.emailMessenger.sendMessageAsync(message);
             } catch {
                 result = {isSuccessful: false};
             }
@@ -89,7 +89,7 @@ export class Service {
 
             return response.sendStatus(400);
         });
-
+        
         this.express.use("/", router);
     }
 }
