@@ -28,7 +28,7 @@ if (options.port) {
         );
     }
 
-    // The maximum port number is 0xFFF, or 65535. Port numbers can also not be negative for obvious reasons.
+    // The maximum port number is 0xFFFF, or 65535. Port numbers can also not be negative for obvious reasons.
     if (listenPort < 0 || listenPort > 65535) {
         throw new Error(
             "Port number must be larger than zero, and smaller than 65535!"
