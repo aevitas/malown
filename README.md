@@ -12,11 +12,11 @@ Providers
 
 We are looking to support a wide variety of popular messaging providers. Below is an overview of the providers we currently support, as well as the ones we aim to support shortly:
 
-[X] [Sendgrid](https://sendgrid.com)
-[X] [Slack Webhooks](https://slack.com)
-[X] [Slack Web Client](https://slack.com)
-[ ] [Twilio](https://twilio.com)
-[ ] [SparkPost](https://sparkpost.com)
+* [X] [Sendgrid](https://sendgrid.com)
+* [X] [Slack Webhooks](https://slack.com)
+* [X] [Slack Web Client](https://slack.com)
+* [ ] [Twilio](https://twilio.com)
+* [ ] [SparkPost](https://sparkpost.com)
 
 License
 -------
