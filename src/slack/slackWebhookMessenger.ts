@@ -15,10 +15,10 @@ export interface ISlackWebhookOptions {
 @injectable()
 export class SlackWebhookMessenger implements IChatMessenger {
     // Slack's client is written in TypeScript, but they don't provide types for it?
-    private webhook: any;
+    private readonly webhook: any;
 
     public constructor(
-        @inject(Types.SlackOptions) options: ISlackWebhookOptions
+        @inject(Types.SlackWebhookOptions) options: ISlackWebhookOptions
     ) {
         if (!options) {
             throw new Error(

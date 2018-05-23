@@ -4,5 +4,6 @@ export const enum Types {
     SendGridMessenger = "SendGridMessenger",
     SendGridOptions = "SendGridOptions",
     Service = "Service",
-    SlackOptions = "SlackOptions"
+    SlackWebhookOptions = "SlackWebhookOptions",
+    SlackWebClientOptions = "SlackWebClientOptions"
 }
