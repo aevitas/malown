@@ -25,6 +25,10 @@ export class SlackMessenger implements IChatMessenger {
             );
         }
 
+        if (!options.webhookUri) {
+            throw new Error("Can not construct the Slack messenger without a valid webhook URI!");
+        }
+
         this.slack = new slackImport();
         this.slack.setWebhook(options.webhookUri);
     }
@@ -43,7 +47,7 @@ export class SlackMessenger implements IChatMessenger {
                 channel: message.recipient,
                 username: message.from,
                 text: message.body
-            });
+            }, (errro) => {});
 
             if (result) {
                 return resolve({ isSuccessful: true });
