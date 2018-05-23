@@ -6,7 +6,7 @@ import {
 import { injectable, inject } from "inversify";
 import { Types } from "../types";
 
-const slackImport = require("slack-node");
+const { IncomingWebhook } = require("@slack/client");
 
 export interface ISlackWebhookOptions {
     webhookUri: string;
@@ -14,7 +14,8 @@ export interface ISlackWebhookOptions {
 
 @injectable()
 export class SlackWebhookMessenger implements IChatMessenger {
-    private slack: any;
+    // Slack's client is written in TypeScript, but they don't provide types for it?
+    private webhook: any;
 
     public constructor(
         @inject(Types.SlackOptions) options: ISlackWebhookOptions
@@ -29,8 +30,7 @@ export class SlackWebhookMessenger implements IChatMessenger {
             throw new Error("Can not construct the Slack messenger without a valid webhook URI!");
         }
 
-        this.slack = new slackImport();
-        this.slack.setWebhook(options.webhookUri);
+        this.webhook = new IncomingWebhook(options.webhookUri);
     }
 
     public sendMessageAsync(
@@ -42,18 +42,15 @@ export class SlackWebhookMessenger implements IChatMessenger {
             );
         }
 
-        return new Promise<IMessageSendResult>((resolve, reject) => {
-            const result = this.slack.webhook({
-                channel: message.recipient,
-                username: message.from,
-                text: message.body});
-            if (result) {
-                return resolve({ isSuccessful: true });
-            }
+        return new Promise<IMessageSendResult>(async (resolve, reject) => {
+            try {
+                await this.webhook.send(message.body);
 
-            return reject(
-                "Could not send the specified message to a slack channel!"
-            );
+                resolve({isSuccessful: true});
+            }
+            catch {
+                reject("Could not deliver message to Slack!");
+            }
         });
     }
 }

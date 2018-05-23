@@ -32,12 +32,4 @@ describe("sendMessageAsync", () => {
     it("empty message", async () => {
         await messenger.sendMessageAsync({} as IMessage).should.throw;
     });
-
-    it("invalid message fails", async () => {
-        await messenger.sendMessageAsync({
-            body: "hello",
-            recipient: "@fwjks",
-            from: "helvete"
-        } as IMessage).should.eventually.be.rejected;
-    });
 });
