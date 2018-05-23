@@ -6,7 +6,7 @@ import {
     ISendGridOptions
 } from "./sendGrid/sendGridMessenger";
 import { Service } from "./service";
-import { SlackMessenger } from "./slack/slackMessenger";
+import { SlackWebhookMessenger } from "./slack/slackWebhookMessenger";
 
 const container = new Container();
 
@@ -15,7 +15,7 @@ const sendGridApiKey: string = process.env.SENDGRID_API_KEY || "";
 container
     .bind<IEmailMessenger>(Types.EmailMessenger)
     .to(SendGridMessenger);
-container.bind<IChatMessenger>(Types.ChatMessenger).to(SlackMessenger);
+container.bind<IChatMessenger>(Types.ChatMessenger).to(SlackWebhookMessenger);
 container
     .bind<ISendGridOptions>(Types.SendGridOptions)
     .toConstantValue({ apiKey: sendGridApiKey, useHtmlMessages: true });

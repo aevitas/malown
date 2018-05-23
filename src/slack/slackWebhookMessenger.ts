@@ -8,16 +8,16 @@ import { Types } from "../types";
 
 const slackImport = require("slack-node");
 
-export interface ISlackOptions {
+export interface ISlackWebhookOptions {
     webhookUri: string;
 }
 
 @injectable()
-export class SlackMessenger implements IChatMessenger {
+export class SlackWebhookMessenger implements IChatMessenger {
     private slack: any;
 
     public constructor(
-        @inject(Types.SlackOptions) options: ISlackOptions
+        @inject(Types.SlackOptions) options: ISlackWebhookOptions
     ) {
         if (!options) {
             throw new Error(
@@ -46,9 +46,7 @@ export class SlackMessenger implements IChatMessenger {
             const result = this.slack.webhook({
                 channel: message.recipient,
                 username: message.from,
-                text: message.body
-            }, (errro) => {});
-
+                text: message.body});
             if (result) {
                 return resolve({ isSuccessful: true });
             }
