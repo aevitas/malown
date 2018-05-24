@@ -11,6 +11,7 @@ RUN npm run build
 FROM node:10-stretch as runner
 
 COPY --from=builderino app/dist ./dist/
+COPY --from=builderino app/node_modules ./node_modules/
 COPY --from=builderino app/*.json ./
 
 CMD ["npm", "start"]
