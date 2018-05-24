@@ -1,4 +1,3 @@
-
 FROM node:10-stretch AS builderino
 
 WORKDIR /app
@@ -15,6 +14,3 @@ COPY --from=builderino app/dist ./dist/
 COPY --from=builderino app/*.json ./
 
 CMD ["npm", "start"]
-
-
-
