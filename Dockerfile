@@ -1,9 +1,20 @@
-FROM node:10-alpine
 
-RUN npm install -g typescript gulp
+FROM node:10-stretch AS builderino
+
+WORKDIR /app
+
+COPY . .
+
+RUN npm cache verify
+RUN npm install
 RUN npm run build
 
-ADD ./*.json .
-ADD ./bin .
+FROM node:10-stretch as runner
+
+COPY --from=builderino app/dist ./dist/
+COPY --from=builderino app/*.json ./
 
 CMD ["npm", "start"]
+
+
+
